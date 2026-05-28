@@ -3,307 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yêu Vy - Forever</title>
+    <title>HGB MEDIA | Professional Tech & Media Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Toàn bộ thiết lập nền tảng */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
         body {
-            background-color: #0d0208; /* Nền tối sâu tạo độ ngầu */
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
         }
-
-        /* Canvas hiệu ứng các hạt phía sau */
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        /* Khung nội dung chính - Phong cách Glassmorphism chuyên nghiệp */
-        .card {
-            background: rgba(255, 20, 147, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 20, 147, 0.2);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            z-index: 2;
-            box-shadow: 0 0 40px rgba(255, 20, 147, 0.15),
-                        inset 0 0 20px rgba(255, 20, 147, 0.05);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        /* Hiệu ứng chữ Neon Hồng Cyberpunk cực ngầu */
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #fff;
-            text-shadow: 
-                0 0 7px #ff1493,
-                0 0 10px #ff1493,
-                0 0 21px #ff1493,
-                0 0 42px #ff69b4,
-                0 0 82px #ff69b4;
-            margin-bottom: 0.5rem;
-            animation: pulse 2s infinite alternate;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #ffb6c1;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            text-transform: uppercase;
-        }
-
-        /* Trái tim 3D phát sáng lãng mạn */
-        .heart-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 2rem;
-        }
-
-        .heart {
-            background-color: #ff1493;
-            display: inline-block;
-            height: 50px;
-            position: relative;
-            top: 25px;
-            transform: rotate(-45deg);
-            width: 50px;
-            box-shadow: 0 0 30px #ff1493;
-            animation: beat 0.8s infinite alternate;
-        }
-
-        .heart:before,
-        .heart:after {
-            content: "";
-            background-color: #ff1493;
-            border-radius: 50%;
-            height: 50px;
-            position: absolute;
-            width: 50px;
-        }
-
-        .heart:before {
-            top: -25px;
-            left: 0;
-        }
-
-        .heart:after {
-            left: 25px;
-            top: 0;
-        }
-
-        /* Nút tương tác chuyên nghiệp */
-        .btn {
-            background: transparent;
-            border: 2px solid #ff1493;
-            color: #fff;
-            padding: 12px 35px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            outline: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            background: #ff1493;
-            box-shadow: 0 0 25px #ff1493;
-            text-shadow: 0 0 5px #fff;
-        }
-
-        /* Lời nhắn ẩn */
-        .message {
-            margin-top: 1.5rem;
-            font-size: 1rem;
-            color: #ffb6c1;
-            font-style: italic;
-            opacity: 0;
-            height: 0;
-            transition: all 0.5s ease;
-            line-height: 1.6;
-        }
-
-        .message.show {
-            opacity: 1;
-            height: auto;
-            margin-top: 1.5rem;
-        }
-
-        /* Các hiệu ứng Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes beat {
-            0% { transform: scale(1) rotate(-45deg); }
-            100% { transform: scale(1.15) rotate(-45deg); box-shadow: 0 0 40px #ff69b4; }
-        }
-
-        @keyframes pulse {
-            0% { text-shadow: 0 0 4px #ff1493, 0 0 10px #ff1493, 0 0 40px #ff69b4; }
-            100% { text-shadow: 0 0 8px #ff1493, 0 0 20px #ff1493, 0 0 60px #ff69b4; }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
         }
     </style>
 </head>
-<body>
+<body class="text-gray-200 overflow-x-hidden">
 
-    <canvas id="particleCanvas"></canvas>
-
-    <div class="card">
-        <div class="heart-container">
-            <div class="heart"></div>
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl px-6 py-4 mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wider gradient-text">HGB MEDIA</a>
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="#about" class="hover:text-blue-400 transition">Giới Thiệu</a>
+                <a href="#services" class="hover:text-blue-400 transition">Dịch Vụ</a>
+                <a href="#projects" class="hover:text-blue-400 transition">Dự Án</a>
+                <a href="#team" class="hover:text-blue-400 transition">Đội Ngũ</a>
+                <a href="#banking" class="hover:text-blue-400 transition">Thanh Toán</a>
+            </nav>
+            <a href="https://zalo.me" target="_blank" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg transition">
+                Liên Hệ Ngay
+            </a>
         </div>
-        <h1>Yêu Vy</h1>
-        <div class="subtitle">Chỉ riêng mình em</div>
-        
-        <button class="btn" onclick="revealMessage()">Khám phá bí mật</button>
-        
-        <div class="message" id="secretMessage">
-            "Trong thế giới hàng tỷ người, anh chỉ hướng về một người duy nhất. Gặp được Vy là điều tuyệt vời nhất trong cuộc đời anh. Cảm ơn em vì đã xuất hiện!"
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-screen">
+        <div class="space-y-6">
+            <span class="text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">
+                <i class="fa-solid fa-bolt mr-1"></i> Support All Mạng Xã Hội
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                Giải Pháp Công Nghệ Đột Phá Tại <span class="gradient-text">HGB MEDIA</span>
+            </h1>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                Chúng tôi chuyên cung cấp các giải pháp tối ưu về lập trình website, hệ thống API, Token và hỗ trợ toàn diện trên mọi nền tảng mạng xã hội. Biến ý tưởng của bạn thành những dòng code thuần thục.
+            </p>
+            <!-- Tech Stack Tags -->
+            <div class="space-y-2">
+                <p class="text-xs uppercase font-semibold text-gray-500 tracking-wider">Ngôn ngữ thông thạo:</p>
+                <div class="flex flex-wrap gap-2 text-sm font-medium">
+                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-yellow-500 flex items-center gap-1"><i class="fa-solid fa-moon"></i> Lua</span>
+                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-orange-500 flex items-center gap-1"><i class="fa-brands fa-java"></i> Java</span>
+                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-blue-500 flex items-center gap-1">C++</span>
+                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-sky-400 flex items-center gap-1"><i class="fa-brands fa-react"></i> Fullstack Web</span>
+                </div>
+            </div>
+            <!-- CEO Badge -->
+            <div class="pt-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center justify-center font-bold text-lg text-white shadow-md shadow-pink-500/20">
+                    GB
+                </div>
+                <div>
+                    <h4 class="font-bold text-white tracking-wide">GIA BẢO CODER</h4>
+                    <p class="text-xs text-pink-500 font-medium">FOUNDER & CEO HGB MEDIA</p>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="relative flex justify-center">
+            <!-- Decorative Glow effect -->
+            <div class="absolute w-72 h-72 bg-purple-600/20 blur-[100px] top-10 left-10 rounded-full"></div>
+            <div class="absolute w-72 h-72 bg-blue-600/20 blur-[100px] bottom-10 right-10 rounded-full"></div>
+            <!-- Tech Graphic Mockup -->
+            <div class="bg-zinc-900/60 border border-zinc-800 p-6 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-sm relative z-10">
+                <div class="flex space-x-2 mb-4">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <pre class="text-xs text-green-400 font-mono overflow-x-auto"><code><span class="text-purple-400">local</span> hgbMedia = {
+    ceo = <span class="text-yellow-300">"Gia Bao Coder"</span>,
+    skills = {<span class="text-yellow-300">"Lua"</span>, <span class="text-yellow-300">"Java"</span>, <span class="text-yellow-300">"C++"</span>},
+    services = <span class="text-yellow-300">"Web, API, Social Media"</span>,
+    status = <span class="text-yellow-300">"Ready to Build"</span>
+}
 
-    <script>
-        // Xử lý hiệu ứng hạt (Particles) bay lãng mạn
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+<span class="text-purple-400">function</span> <span class="text-blue-400">hgbMedia:support</span>()
+    <span class="text-purple-400">print</span>(<span class="text-yellow-300">"Supporting ALL MXH 24/7!"</span>)
+<span class="text-purple-400">end</span>
 
-        let particlesArray = [];
-        const numberOfParticles = 60;
+hgbMedia:support()</code></pre>
+            </div>
+        </div>
+    </section>
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+    <hr class="border-gray-900">
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * -1 - 0.2; // Bay lên trên nhẹ nhàng
-                this.color = `rgba(255, ${Math.floor(Math.random() * 100) + 20}, 147, ${Math.random() * 0.5 + 0.2})`;
-            }
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Dịch Vụ Cốt Lõi</h2>
+            <p class="text-gray-400 text-sm md:text-base">Chúng tôi mang lại các giải pháp kỹ thuật chất lượng cao, tối ưu tuyệt đối cho mô hình kinh doanh của bạn.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Code Web Theo Yêu Cầu</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Thiết kế website chuẩn SEO, tối ưu UI/UX, bảo mật cao. Hiện thực hóa mọi tính năng phức tạp theo đúng mong muốn của khách hàng.</p>
+            </div>
+            <!-- Service 2 -->
+            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-6">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">API, Token & Gare</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Cung cấp hệ thống API mượt mà, phân phối Token ổn định và các giải pháp tích hợp Gare tối ưu hiệu năng cho hệ thống của bạn.</p>
+            </div>
+            <!-- Service 3 -->
+            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl mb-6">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Support ALL MXH</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Hỗ trợ toàn diện các vấn đề thuật toán, tương tác, bảo mật, và dịch vụ liên quan đến Facebook, Instagram, TikTok, Telegram...</p>
+            </div>
+        </div>
+    </section>
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+    <!-- Projects & Diagrams Section -->
+    <section id="projects" class="py-24 bg-black/30 border-y border-zinc-900 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Sơ Đồ & Dự Án Vận Hành</h2>
+                <p class="text-gray-400 text-sm">Quy trình làm việc minh bạch và các cấu trúc dự án chuẩn hóa từ HGB Media.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="flex-none w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">1</div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white">Khảo sát & Lên Sơ đồ cấu trúc</h4>
+                            <p class="text-gray-400 text-sm">Phân tích yêu cầu, vẽ sơ đồ tính năng logic (Mindmap/Diagram) trước khi bắt tay thực hiện dự án.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-none w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">2</div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white">Triển khai Coding tinh gọn</h4>
+                            <p class="text-gray-400 text-sm">Sử dụng đa ngôn ngữ thạo như Lua, Java, C++ để tối ưu hóa tốt nhất theo từng nền tảng phần mềm khác nhau.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-none w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-sm">3</div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white">Bàn giao & Vận hành thực tế</h4>
+                            <p class="text-gray-400 text-sm">Đưa dự án lên môi trường live, hỗ trợ tích hợp các cổng thanh toán tự động (Banking) an toàn tuyệt đối.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Diagram Mockup visual -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
+                    <div class="text-xs uppercase font-bold tracking-widest text-zinc-500 mb-2">Project Schema Architecture</div>
+                    <div class="p-3 bg-zinc-950 rounded-lg border border-blue-500/30 text-center text-blue-400 font-semibold text-sm">Client Request (Web/MXH)</div>
+                    <div class="text-center text-zinc-600"><i class="fa-solid fa-arrow-down"></i></div>
+                    <div class="p-3 bg-zinc-950 rounded-lg border border-purple-500/30 text-center text-purple-400 font-semibold text-sm">HGB Core API & Token Middleware</div>
+                    <div class="text-center text-zinc-600"><i class="fa-solid fa-arrow-down"></i></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-3 bg-zinc-950 rounded-lg border border-zinc-800 text-center text-gray-300 text-xs">Database Backend (Java/C++)</div>
+                        <div class="p-3 bg-zinc-950 rounded-lg border border-zinc-800 text-center text-gray-300 text-xs">Auto Banking Gateway</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                // Nếu bay hết màn hình thì xuất hiện lại ở dưới
-                if (this.y < 0) {
-                    this.y = canvas.height;
-                    this.x = Math.random() * canvas.width;
-                }
-                if (this.x > canvas.width || this.x < 0) {
-                    this.speedX = -this.speedX;
-                }
-            }
+    <!-- Team Section -->
+    <section id="team" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Đội Ngũ HGB Media</h2>
+            <p class="text-gray-400 text-sm">Những cộng sự tài năng đứng sau các giải pháp công nghệ đỉnh cao.</p>
+        </div>
+        <div class="flex justify-center">
+            <!-- Main Leader Card -->
+            <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl text-center max-w-sm w-full relative overflow-hidden group">
+                <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                <div class="w-24 h-24 bg-zinc-800 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-purple-500">
+                    <i class="fa-solid fa-user-gear text-4xl text-purple-400"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-1">GIA BẢO CODER</h3>
+                <p class="text-sm text-blue-400 font-medium mb-4">Founder / Lead Developer</p>
+                <p class="text-gray-400 text-xs leading-relaxed mb-6">Chịu trách nhiệm cấu trúc hệ thống lõi, am hiểu sâu sắc kiến trúc hệ thống Lua, Java, C++ và giải pháp tích hợp API mạng xã hội.</p>
+                <div class="flex justify-center space-x-4 text-gray-400">
+                    <a href="#" class="hover:text-blue-400 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-blue-400 transition"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+    <!-- Banking Section -->
+    <section id="banking" class="py-24 bg-zinc-950 border-t border-zinc-900 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Cổng Thanh Toán</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Để thuận tiện cho việc triển khai dự án nhanh chóng, quý khách có thể thực hiện giao dịch thông qua cổng thanh toán chính thức dưới đây của HGB Media. Hệ thống kiểm tra giao dịch tự động.</p>
+                <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 flex items-center gap-3 text-sm">
+                    <i class="fa-solid fa-shield-inverse text-green-400 text-lg"></i>
+                    <span class="text-gray-300">Giao dịch an toàn, bảo mật thông tin dự án tuyệt đối.</span>
+                </div>
+            </div>
+            <!-- Banking Card Info -->
+            <div class="bg-gradient-to-br from-zinc-900 to-black p-6 rounded-2xl border border-zinc-800 shadow-xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="font-bold tracking-wider text-sm text-gray-400">OFFICIAL BANKING</span>
+                    <i class="fa-solid fa-credit-card text-2xl text-blue-400"></i>
+                </div>
+                <div class="space-y-3 pt-4">
+                    <div class="flex justify-between border-b border-zinc-800 pb-2">
+                        <span class="text-gray-400 text-sm">Chủ tài khoản:</span>
+                        <span class="text-white font-semibold uppercase text-sm">NGUYEN GIA BAO</span>
+                    </div>
+                    <div class="flex justify-between border-b border-zinc-800 pb-2">
+                        <span class="text-gray-400 text-sm">Số tài khoản:</span>
+                        <span class="text-yellow-400 font-mono font-bold text-sm">012345678999</span>
+                    </div>
+                    <div class="flex justify-between border-b border-zinc-800 pb-2">
+                        <span class="text-gray-400 text-sm">Ngân hàng:</span>
+                        <span class="text-white font-semibold text-sm">MB BANK (Quân Đội)</span>
+                    </div>
+                    <div class="flex justify-between pt-1">
+                        <span class="text-gray-400 text-sm">Nội dung chuyển khoản:</span>
+                        <span class="text-blue-400 font-mono text-xs font-semibold">[Tên của bạn] CODE WEB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function init() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
+    <!-- Footer -->
+    <footer class="bg-[#070a10] border-t border-zinc-900 text-center py-8 text-xs text-gray-500">
+        <p class="mb-2">&copy; 2026 HGB MEDIA. All rights reserved.</p>
+        <p>Designed and Built by <span class="text-gray-400 font-semibold">GIA BẢO CODER</span></p>
+    </footer>
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        // Hàm click hiện lời nhắn lãng mạn
-        function revealMessage() {
-            const msg = document.getElementById('secretMessage');
-            const btn = document.querySelector('.btn');
-            
-            msg.classList.toggle('show');
-            
-            if (msg.classList.contains('show')) {
-                btn.textContent = "Đóng lại";
-                // Tạo hiệu ứng nổ tim nhỏ khi click
-                createHeartBurst();
-            } else {
-                btn.textContent = "Khám phá bí mật";
-            }
-        }
-
-        // Hiệu ứng nổ tim nhẹ tăng phần tinh tế
-        function createHeartBurst() {
-            for(let i=0; i<10; i++) {
-                const burst = document.createElement('div');
-                burst.style.position = 'absolute';
-                burst.style.width = '10px';
-                burst.style.height = '10px';
-                burst.style.backgroundColor = '#ff69b4';
-                burst.style.transform = 'rotate(45deg)';
-                burst.style.left = '50%';
-                burst.style.top = '40%';
-                burst.style.borderRadius = '2px';
-                burst.style.transition = 'all 0.8s ease-out';
-                burst.style.zIndex = '3';
-                
-                document.body.appendChild(burst);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 150 + 50;
-                
-                setTimeout(() => {
-                    burst.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(45deg)`;
-                    burst.style.opacity = '0';
-                }, 10);
-                
-                setTimeout(() => { burst.remove(); }, 800);
-            }
-        }
-    </script>
 </body>
 </html>
