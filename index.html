@@ -3,259 +3,616 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HGB MEDIA | Professional Tech & Media Services</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Gia Bảo Dev | Luxury Portal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
+        :root {
+            --bg-color: #050608;
+            --card-bg: rgba(15, 17, 23, 0.75);
+            --card-hover: rgba(26, 30, 42, 0.85);
+            --accent-gold: #d4af37;
+            --accent-gold-light: #f3e5ab;
+            --accent-rose-gold: #e0a96d;
+            --accent-platinum: #e5e4e2;
+            --accent-cyan: #00f2fe;
+            --accent-green: #00e676;
+            --text-main: #f8fafc;
+            --text-muted: #8e9aaf;
+            --border: rgba(212, 175, 55, 0.15);
+            --border-glow: rgba(212, 175, 55, 0.4);
+            --glass-blur: 20px;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Luxury Glow Effects */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulseGlow 10s infinite alternate ease-in-out;
+        }
+
+        body::before {
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+        }
+
+        body::after {
+            bottom: -60px;
+            right: 10%;
+            background: radial-gradient(circle, rgba(224, 169, 109, 0.12), transparent 70%);
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9) translateY(0); opacity: 0.6; }
+            100% { transform: scale(1.15) translateY(25px); opacity: 0.9; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 32px 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85), 
+                        0 0 35px rgba(212, 175, 55, 0.05);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .container:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 
+                        0 0 45px rgba(212, 175, 55, 0.12);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 104px;
+            height: 104px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose-gold), var(--accent-gold-light));
+            animation: rotateGradient 8s linear infinite;
+            z-index: 0;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes rotateGradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 3px solid var(--bg-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .profile-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-gold-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+
+        .profile-header p {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- NOTICE BOX (KHU VỰC THÔNG BÁO) --- */
+        .notice-box {
+            position: relative;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(224, 169, 109, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: noticeGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes noticeGlow {
+            0% { border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+            100% { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15); }
+        }
+
+        .notice-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notice-content {
+            flex: 1;
+        }
+
+        .notice-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold-light);
+            margin-bottom: 4px;
+        }
+
+        .notice-text {
+            font-size: 0.82rem;
+            color: var(--text-main);
+            line-height: 1.45;
+            opacity: 0.9;
+        }
+
+        .notice-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0 4px;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .notice-close:hover {
+            color: #ffffff;
+        }
+
+        /* Modern Sliding Tab System */
+        .tab-nav {
+            position: relative;
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 5px;
+            margin-bottom: 24px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            color: #000000;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            left: 5px;
+            width: calc(50% - 7px);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            border-radius: 12px;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+            z-index: 1;
+        }
+
+        /* Animated Tab Content Container */
+        .tab-wrapper {
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+            opacity: 0;
+            transform: translateY(12px) scale(0.98);
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tab-content.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--accent-gold);
+            margin: 24px 0 12px 6px;
+            opacity: 0.85;
+        }
+
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Enhanced Interactive Cards */
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            background: var(--card-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .link-card:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .link-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.08) rotate(3deg);
+        }
+
+        .link-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: -0.2px;
+        }
+
+        .link-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Dynamic Badges */
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose-gold));
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            flex-shrink: 0;
+        }
+
+        .badge-cyan {
+            background: linear-gradient(135deg, #00c6ff, var(--accent-cyan));
+            color: #000000;
+            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+        }
+
+        .badge-green {
+            background: linear-gradient(135deg, #00b0ff, var(--accent-green));
+            color: #000000;
+            box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+        }
+
+        .footer {
+            margin-top: 32px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
-<body class="text-gray-200 overflow-x-hidden">
+<body>
 
-    <!-- Header / Navigation -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl px-6 py-4 mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-wider gradient-text">HGB MEDIA</a>
-            <nav class="hidden md:flex space-x-8 font-medium text-sm">
-                <a href="#about" class="hover:text-blue-400 transition">Giới Thiệu</a>
-                <a href="#services" class="hover:text-blue-400 transition">Dịch Vụ</a>
-                <a href="#projects" class="hover:text-blue-400 transition">Dự Án</a>
-                <a href="#team" class="hover:text-blue-400 transition">Đội Ngũ</a>
-                <a href="#banking" class="hover:text-blue-400 transition">Thanh Toán</a>
-            </nav>
-            <a href="https://zalo.me" target="_blank" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg transition">
-                Liên Hệ Ngay
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="https://cdn.phototourl.com/free/2026-08-07-32d41ed4-4d66-4bdb-ba1e-6c60dee612d2.jpg" alt="Gia Bảo Avatar" class="avatar" id="userAvatar">
+            </div>
+            <h1 id="userName">RUBU MAP LIÊN QUÂN</h1>
+            <p>MOD LIÊN QUÂN FREE | RUBU MOD</p>
+        </div>
+
+        <!-- KHU VỰC THÔNG BÁO (NOTICE BOX) -->
+        <div class="notice-box" id="noticeBox">
+            <div class="notice-icon">📢</div>
+            <div class="notice-content">
+                <div class="notice-title">Thông Báo Cập Nhật</div>
+                <div class="notice-text">
+                    MAP Android CHỈ ĐĂNG NHẬP ĐƯỢC GARENA VÀ FB ,GARENA KHI ĐĂNG NHẬP GẶP LỖI MÀNG HÌNH TRẮNG THÌ TẢI THÊM APP GARENA RỒI ĐĂNG NHẬP TK VÀO APP RỒI LIÊN KÊT VỚI GAME
+                    CÒN FB THÌ MỌI NGƯỜI XÓA APP FB NGOÀI TRƯỚC RỒI VÀO GAME ĐĂNG NHẬP NHA | LƯU Ý ĐÂY MÀ MAP CHƠI KÍN MỌI NGƯỜI ĐÁNH KÍN ĐỂ TRÁNH BỊ BAND VÀ HẠN CHẾ MOD SKIN ĐỂ TRÁNH TRẬN ẢO
+                </div>
+            </div>
+            <button class="notice-close" onclick="closeNotice()" title="Đóng thông báo">✕</button>
+        </div>
+
+        <!-- Sliding Tab Navigation -->
+        <div class="tab-nav">
+            <div class="tab-indicator" id="tabIndicator"></div>
+            <button class="tab-btn active" onclick="switchTab('mods-tab', 0, this)">Mod Downloads</button>
+            <button class="tab-btn" onclick="switchTab('keys-tab', 1, this)">Key System</button>
+        </div>
+
+        <!-- Tab Content Area -->
+        <div class="tab-wrapper">
+            <!-- TAB 1: MOD DOWNLOADS -->
+            <div id="mods-tab" class="tab-content active">
+                <a href="https://www.mediafire.com/file/wci5qpjwnor5tq7/%25236_Garena%252BLi%25C3%25AAn%252BQu%25C3%25A2n%252BMobile_1_63_1_5_APKPure_apks_clone_clone_clone.apk/file" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">MAP Android BẢN 64 BIT</span>
+                            <span class="link-desc">64 BIT</span>
+                        </div>
+                    </div>
+                    <span class="badge">HOT</span>
+                </a>
+
+                <a href="https://www.mediafire.com/file/089bzkhc7f3y2sm/%5Bx32%5DLi%C3%AAn_Qu%C3%A2n_1.63.1.5_apkcombo.com_apks_clone%234_fix.apk" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">MAP Android BẢN 32 BIT</span>
+                            <span class="link-desc">32 BIT</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://testflight.apple.com/join/qQ8pcgfC" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">MAP IOS</span>
+                            <span class="link-desc">BẢN TF SÀI NGON SÀI BỀN ,MOD SKIN ÍT</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-cyan">NEW</span>
+                </a>
+
+                <a href="https://ipas.cc/r371ga" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">MAP IOS</span>
+                            <span class="link-desc">BẢN NÀY MOD ĐƯỢC SKIN 3S</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://example.com/mod5" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://via.placeholder.com/64/d4af37/000000?text=M5" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">Custom UI Theme Pack</span>
+                            <span class="link-desc">Neon Cyberpunk skin overlay</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://example.com/mod6" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://via.placeholder.com/64/d4af37/000000?text=M6" alt="Mod Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">FPS Booster & Lag Fix</span>
+                            <span class="link-desc">Optimize RAM & render settings</span>
+                        </div>
+                    </div>
+                    <span class="badge">VIP</span>
+                </a>
+            </div>
+
+            <!-- TAB 2: KEY SYSTEM -->
+            <div id="keys-tab" class="tab-content">
+                <a href="https://example.com/key-android" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://via.placeholder.com/64/00e676/000000?text=AND" alt="Android Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">Get Key Android</span>
+                            <span class="link-desc">Get key for Android APK execution</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-green">APK</span>
+                </a>
+
+                <a href="https://example.com/key-ios" target="_blank" class="link-card">
+                    <div class="link-info">
+                        <img src="https://via.placeholder.com/64/ffffff/000000?text=IOS" alt="iOS Icon" class="link-icon">
+                        <div class="link-text">
+                            <span class="link-title">Get Key iOS</span>
+                            <span class="link-desc">Get key for iOS / IPA execution</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-cyan">IPA</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Social Profiles Section -->
+        <div class="section-title">Profiles & Socials</div>
+        <div class="links-group">
+            <a href="https://facebook.com" target="_blank" class="link-card">
+                <div class="link-info">
+                    <img src="https://via.placeholder.com/64/1877f2/ffffff?text=FB" alt="Social Icon" class="link-icon">
+                    <div class="link-text">
+                        <span class="link-title">Facebook Profile</span>
+                        <span class="link-desc">Contact for support</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtube.com" target="_blank" class="link-card">
+                <div class="link-info">
+                    <img src="https://via.placeholder.com/64/ff0000/ffffff?text=YT" alt="Social Icon" class="link-icon">
+                    <div class="link-text">
+                        <span class="link-title">YouTube Channel</span>
+                        <span class="link-desc">Mod showcase & tutorials</span>
+                    </div>
+                </div>
             </a>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="about" class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-screen">
-        <div class="space-y-6">
-            <span class="text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">
-                <i class="fa-solid fa-bolt mr-1"></i> Support All Mạng Xã Hội
-            </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
-                Giải Pháp Công Nghệ Đột Phá Tại <span class="gradient-text">HGB MEDIA</span>
-            </h1>
-            <p class="text-gray-400 text-lg leading-relaxed">
-                Chúng tôi chuyên cung cấp các giải pháp tối ưu về lập trình website, hệ thống API, Token và hỗ trợ toàn diện trên mọi nền tảng mạng xã hội. Biến ý tưởng của bạn thành những dòng code thuần thục.
-            </p>
-            <!-- Tech Stack Tags -->
-            <div class="space-y-2">
-                <p class="text-xs uppercase font-semibold text-gray-500 tracking-wider">Ngôn ngữ thông thạo:</p>
-                <div class="flex flex-wrap gap-2 text-sm font-medium">
-                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-yellow-500 flex items-center gap-1"><i class="fa-solid fa-moon"></i> Lua</span>
-                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-orange-500 flex items-center gap-1"><i class="fa-brands fa-java"></i> Java</span>
-                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-blue-500 flex items-center gap-1">C++</span>
-                    <span class="bg-zinc-950 px-3 py-1 rounded border border-zinc-800 text-sky-400 flex items-center gap-1"><i class="fa-brands fa-react"></i> Fullstack Web</span>
-                </div>
-            </div>
-            <!-- CEO Badge -->
-            <div class="pt-4 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center justify-center font-bold text-lg text-white shadow-md shadow-pink-500/20">
-                    GB
-                </div>
-                <div>
-                    <h4 class="font-bold text-white tracking-wide">GIA BẢO CODER</h4>
-                    <p class="text-xs text-pink-500 font-medium">FOUNDER & CEO HGB MEDIA</p>
-                </div>
-            </div>
+        <div class="footer">
+            &copy; 2026 HGB Media. Managed by Gia Bảo.
         </div>
-        <div class="relative flex justify-center">
-            <!-- Decorative Glow effect -->
-            <div class="absolute w-72 h-72 bg-purple-600/20 blur-[100px] top-10 left-10 rounded-full"></div>
-            <div class="absolute w-72 h-72 bg-blue-600/20 blur-[100px] bottom-10 right-10 rounded-full"></div>
-            <!-- Tech Graphic Mockup -->
-            <div class="bg-zinc-900/60 border border-zinc-800 p-6 rounded-2xl shadow-2xl w-full max-w-md backdrop-blur-sm relative z-10">
-                <div class="flex space-x-2 mb-4">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <pre class="text-xs text-green-400 font-mono overflow-x-auto"><code><span class="text-purple-400">local</span> hgbMedia = {
-    ceo = <span class="text-yellow-300">"Gia Bao Coder"</span>,
-    skills = {<span class="text-yellow-300">"Lua"</span>, <span class="text-yellow-300">"Java"</span>, <span class="text-yellow-300">"C++"</span>},
-    services = <span class="text-yellow-300">"Web, API, Social Media"</span>,
-    status = <span class="text-yellow-300">"Ready to Build"</span>
-}
+    </div>
 
-<span class="text-purple-400">function</span> <span class="text-blue-400">hgbMedia:support</span>()
-    <span class="text-purple-400">print</span>(<span class="text-yellow-300">"Supporting ALL MXH 24/7!"</span>)
-<span class="text-purple-400">end</span>
+    <script>
+        function closeNotice() {
+            const notice = document.getElementById('noticeBox');
+            notice.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            notice.style.opacity = '0';
+            notice.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                notice.style.display = 'none';
+            }, 300);
+        }
 
-hgbMedia:support()</code></pre>
-            </div>
-        </div>
-    </section>
+        function switchTab(tabId, index, element) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            const indicator = document.getElementById('tabIndicator');
 
-    <hr class="border-gray-900">
+            indicator.style.transform = `translateX(${index * 100}%)`;
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Dịch Vụ Cốt Lõi</h2>
-            <p class="text-gray-400 text-sm md:text-base">Chúng tôi mang lại các giải pháp kỹ thuật chất lượng cao, tối ưu tuyệt đối cho mô hình kinh doanh của bạn.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Service 1 -->
-            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">Code Web Theo Yêu Cầu</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Thiết kế website chuẩn SEO, tối ưu UI/UX, bảo mật cao. Hiện thực hóa mọi tính năng phức tạp theo đúng mong muốn của khách hàng.</p>
-            </div>
-            <!-- Service 2 -->
-            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-6">
-                    <i class="fa-solid fa-key"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">API, Token & Gare</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Cung cấp hệ thống API mượt mà, phân phối Token ổn định và các giải pháp tích hợp Gare tối ưu hiệu năng cho hệ thống của bạn.</p>
-            </div>
-            <!-- Service 3 -->
-            <div class="service-card bg-zinc-900/40 p-8 rounded-2xl border border-zinc-800 transition duration-300">
-                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl mb-6">
-                    <i class="fa-solid fa-share-nodes"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">Support ALL MXH</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Hỗ trợ toàn diện các vấn đề thuật toán, tương tác, bảo mật, và dịch vụ liên quan đến Facebook, Instagram, TikTok, Telegram...</p>
-            </div>
-        </div>
-    </section>
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
 
-    <!-- Projects & Diagrams Section -->
-    <section id="projects" class="py-24 bg-black/30 border-y border-zinc-900 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Sơ Đồ & Dự Án Vận Hành</h2>
-                <p class="text-gray-400 text-sm">Quy trình làm việc minh bạch và các cấu trúc dự án chuẩn hóa từ HGB Media.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <div class="flex gap-4">
-                        <div class="flex-none w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">1</div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-white">Khảo sát & Lên Sơ đồ cấu trúc</h4>
-                            <p class="text-gray-400 text-sm">Phân tích yêu cầu, vẽ sơ đồ tính năng logic (Mindmap/Diagram) trước khi bắt tay thực hiện dự án.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="flex-none w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">2</div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-white">Triển khai Coding tinh gọn</h4>
-                            <p class="text-gray-400 text-sm">Sử dụng đa ngôn ngữ thạo như Lua, Java, C++ để tối ưu hóa tốt nhất theo từng nền tảng phần mềm khác nhau.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="flex-none w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-sm">3</div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-white">Bàn giao & Vận hành thực tế</h4>
-                            <p class="text-gray-400 text-sm">Đưa dự án lên môi trường live, hỗ trợ tích hợp các cổng thanh toán tự động (Banking) an toàn tuyệt đối.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Diagram Mockup visual -->
-                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-                    <div class="text-xs uppercase font-bold tracking-widest text-zinc-500 mb-2">Project Schema Architecture</div>
-                    <div class="p-3 bg-zinc-950 rounded-lg border border-blue-500/30 text-center text-blue-400 font-semibold text-sm">Client Request (Web/MXH)</div>
-                    <div class="text-center text-zinc-600"><i class="fa-solid fa-arrow-down"></i></div>
-                    <div class="p-3 bg-zinc-950 rounded-lg border border-purple-500/30 text-center text-purple-400 font-semibold text-sm">HGB Core API & Token Middleware</div>
-                    <div class="text-center text-zinc-600"><i class="fa-solid fa-arrow-down"></i></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-3 bg-zinc-950 rounded-lg border border-zinc-800 text-center text-gray-300 text-xs">Database Backend (Java/C++)</div>
-                        <div class="p-3 bg-zinc-950 rounded-lg border border-zinc-800 text-center text-gray-300 text-xs">Auto Banking Gateway</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
 
-    <!-- Team Section -->
-    <section id="team" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Đội Ngũ HGB Media</h2>
-            <p class="text-gray-400 text-sm">Những cộng sự tài năng đứng sau các giải pháp công nghệ đỉnh cao.</p>
-        </div>
-        <div class="flex justify-center">
-            <!-- Main Leader Card -->
-            <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl text-center max-w-sm w-full relative overflow-hidden group">
-                <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-                <div class="w-24 h-24 bg-zinc-800 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-purple-500">
-                    <i class="fa-solid fa-user-gear text-4xl text-purple-400"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-white mb-1">GIA BẢO CODER</h3>
-                <p class="text-sm text-blue-400 font-medium mb-4">Founder / Lead Developer</p>
-                <p class="text-gray-400 text-xs leading-relaxed mb-6">Chịu trách nhiệm cấu trúc hệ thống lõi, am hiểu sâu sắc kiến trúc hệ thống Lua, Java, C++ và giải pháp tích hợp API mạng xã hội.</p>
-                <div class="flex justify-center space-x-4 text-gray-400">
-                    <a href="#" class="hover:text-blue-400 transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-blue-400 transition"><i class="fa-brands fa-telegram"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+            setTimeout(() => {
+                document.getElementById(tabId).classList.add('active');
+            }, 50);
+        }
 
-    <!-- Banking Section -->
-    <section id="banking" class="py-24 bg-zinc-950 border-t border-zinc-900 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-3xl font-bold mb-4">Cổng Thanh Toán</h2>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">Để thuận tiện cho việc triển khai dự án nhanh chóng, quý khách có thể thực hiện giao dịch thông qua cổng thanh toán chính thức dưới đây của HGB Media. Hệ thống kiểm tra giao dịch tự động.</p>
-                <div class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 flex items-center gap-3 text-sm">
-                    <i class="fa-solid fa-shield-inverse text-green-400 text-lg"></i>
-                    <span class="text-gray-300">Giao dịch an toàn, bảo mật thông tin dự án tuyệt đối.</span>
-                </div>
-            </div>
-            <!-- Banking Card Info -->
-            <div class="bg-gradient-to-br from-zinc-900 to-black p-6 rounded-2xl border border-zinc-800 shadow-xl space-y-4">
-                <div class="flex justify-between items-center">
-                    <span class="font-bold tracking-wider text-sm text-gray-400">OFFICIAL BANKING</span>
-                    <i class="fa-solid fa-credit-card text-2xl text-blue-400"></i>
-                </div>
-                <div class="space-y-3 pt-4">
-                    <div class="flex justify-between border-b border-zinc-800 pb-2">
-                        <span class="text-gray-400 text-sm">Chủ tài khoản:</span>
-                        <span class="text-white font-semibold uppercase text-sm">NGUYEN GIA BAO</span>
-                    </div>
-                    <div class="flex justify-between border-b border-zinc-800 pb-2">
-                        <span class="text-gray-400 text-sm">Số tài khoản:</span>
-                        <span class="text-yellow-400 font-mono font-bold text-sm">012345678999</span>
-                    </div>
-                    <div class="flex justify-between border-b border-zinc-800 pb-2">
-                        <span class="text-gray-400 text-sm">Ngân hàng:</span>
-                        <span class="text-white font-semibold text-sm">MB BANK (Quân Đội)</span>
-                    </div>
-                    <div class="flex justify-between pt-1">
-                        <span class="text-gray-400 text-sm">Nội dung chuyển khoản:</span>
-                        <span class="text-blue-400 font-mono text-xs font-semibold">[Tên của bạn] CODE WEB</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        document.addEventListener('DOMContentLoaded', () => {
+            const avatar = document.getElementById('userAvatar');
+            avatar.onerror = () => {
+                avatar.src = 'https://via.placeholder.com/150/d4af37/000000?text=GB';
+            };
 
-    <!-- Footer -->
-    <footer class="bg-[#070a10] border-t border-zinc-900 text-center py-8 text-xs text-gray-500">
-        <p class="mb-2">&copy; 2026 HGB MEDIA. All rights reserved.</p>
-        <p>Designed and Built by <span class="text-gray-400 font-semibold">GIA BẢO CODER</span></p>
-    </footer>
-
+            const linkIcons = document.querySelectorAll('.link-icon');
+            linkIcons.forEach(icon => {
+                icon.onerror = () => {
+                    icon.src = 'https://via.placeholder.com/64/1a1e2a/d4af37?text=ICON';
+                };
+            });
+        });
+    </script>
 </body>
 </html>
