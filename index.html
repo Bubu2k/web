@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gia Bảo Dev | Luxury Portal</title>
+    <title>Rubu Dev | Nature Animated Portal</title>
     <style>
         :root {
-            --bg-color: #050608;
-            --card-bg: rgba(15, 17, 23, 0.75);
-            --card-hover: rgba(26, 30, 42, 0.85);
-            --accent-gold: #d4af37;
-            --accent-gold-light: #f3e5ab;
-            --accent-rose-gold: #e0a96d;
-            --accent-platinum: #e5e4e2;
-            --accent-cyan: #00f2fe;
-            --accent-green: #00e676;
-            --text-main: #f8fafc;
-            --text-muted: #8e9aaf;
-            --border: rgba(212, 175, 55, 0.15);
-            --border-glow: rgba(212, 175, 55, 0.4);
+            --bg-color: #040d08;
+            --card-bg: rgba(10, 26, 17, 0.85);
+            --accent-emerald: #10b981;
+            --accent-leaf: #34d399;
+            --accent-gold-leaf: #d4af37;
+            --accent-cyan-water: #06b6d4;
+            --accent-sage: #a7f3d0;
+            --text-main: #f0fdf4;
+            --text-muted: #739a82;
             --glass-blur: 20px;
         }
 
@@ -42,84 +38,115 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Luxury Glow Effects */
+        /* Natural Bio-glow background effects */
         body::before, body::after {
             content: '';
             position: absolute;
-            width: 360px;
-            height: 360px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(140px);
             z-index: -1;
             pointer-events: none;
-            animation: pulseGlow 10s infinite alternate ease-in-out;
+            animation: natureGlow 12s infinite alternate ease-in-out;
         }
 
         body::before {
-            top: -60px;
+            top: -80px;
             left: 50%;
             transform: translateX(-50%);
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent 70%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25), transparent 70%);
         }
 
         body::after {
-            bottom: -60px;
+            bottom: -80px;
             right: 10%;
-            background: radial-gradient(circle, rgba(224, 169, 109, 0.12), transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
         }
 
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9) translateY(0); opacity: 0.6; }
-            100% { transform: scale(1.15) translateY(25px); opacity: 0.9; }
+        @keyframes natureGlow {
+            0% { transform: scale(0.85) translateY(0); opacity: 0.5; }
+            100% { transform: scale(1.2) translateY(30px); opacity: 0.85; }
+        }
+
+        /* MASTER GLOW BORDER WRAPPER CLASS */
+        .glow-box {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            padding: 2px;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .glow-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg,
+                transparent 120deg,
+                var(--accent-emerald) 180deg,
+                var(--accent-leaf) 220deg,
+                var(--accent-gold-leaf) 250deg,
+                transparent 300deg,
+                transparent 360deg
+            );
+            animation: rotateBorder 5s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .container {
+            position: relative;
+            z-index: 1;
             width: 100%;
             max-width: 480px;
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 28px;
+            border-radius: 26px;
             padding: 32px 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85), 
-                        0 0 35px rgba(212, 175, 55, 0.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 
+                        0 0 30px rgba(16, 185, 129, 0.1);
             backdrop-filter: blur(var(--glass-blur));
             -webkit-backdrop-filter: blur(var(--glass-blur));
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .container:hover {
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 
-                        0 0 45px rgba(212, 175, 55, 0.12);
-        }
-
-        /* Profile Header */
         .profile-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .avatar-wrapper {
             position: relative;
-            width: 104px;
-            height: 104px;
+            width: 108px;
+            height: 108px;
             margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            padding: 3px;
         }
 
         .avatar-wrapper::before {
             content: '';
             position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose-gold), var(--accent-gold-light));
-            animation: rotateGradient 8s linear infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                var(--accent-emerald),
+                var(--accent-gold-leaf),
+                var(--accent-leaf),
+                var(--accent-emerald)
+            );
+            animation: rotateBorder 4s linear infinite;
             z-index: 0;
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
-        }
-
-        @keyframes rotateGradient {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .avatar {
@@ -129,8 +156,7 @@
             object-fit: cover;
             position: relative;
             z-index: 1;
-            border: 3px solid var(--bg-color);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--bg-color);
         }
 
         .profile-header h1 {
@@ -138,88 +164,290 @@
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 6px;
-            background: linear-gradient(135deg, #ffffff 40%, var(--accent-gold-light));
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-sage));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .profile-header p {
-            color: var(--accent-gold);
+            color: var(--accent-leaf);
             font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* --- NOTICE BOX (KHU VỰC THÔNG BÁO) --- */
-        .notice-box {
-            position: relative;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(224, 169, 109, 0.05));
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 14px 16px;
-            margin-bottom: 24px;
+        /* Notice Buttons */
+        .notice-action-group {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            animation: noticeGlow 3s infinite alternate ease-in-out;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        @keyframes noticeGlow {
-            0% { border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-            100% { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15); }
-        }
-
-        .notice-icon {
-            font-size: 1.2rem;
-            line-height: 1;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .notice-content {
+        .notice-btn-wrapper {
             flex: 1;
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            padding: 1px;
         }
 
-        .notice-title {
+        .notice-btn-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg,
+                var(--accent-leaf) 180deg,
+                transparent 360deg
+            );
+            animation: rotateBorder 3s linear infinite;
+        }
+
+        .toggle-notice-btn {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 10px 8px;
+            background: #091e13;
+            border: none;
+            border-radius: 13px;
+            color: var(--accent-sage);
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .toggle-notice-btn:hover {
+            background: rgba(16, 185, 129, 0.25);
+        }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 10, 6, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            border-radius: 26px;
+            overflow: hidden;
+            padding: 2px;
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-card-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg,
+                var(--accent-emerald) 120deg,
+                var(--accent-gold-leaf) 240deg,
+                transparent 360deg
+            );
+            animation: rotateBorder 4s linear infinite;
+        }
+
+        .modal-overlay.active .modal-card-wrapper {
+            transform: scale(1);
+        }
+
+        .modal-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 24px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+            text-align: center;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-tab-nav {
+            display: flex;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 16px;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .modal-tab-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
             font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .modal-tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-leaf));
+            color: #040d08;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .modal-tab-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-tab-content::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 4px;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-icon {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
             font-weight: 800;
+            color: var(--accent-sage);
+            margin-bottom: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent-gold-light);
+            text-align: center;
+        }
+
+        /* Formatted Modal Body Content */
+        .modal-body {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .notice-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-emerald);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+        }
+
+        .notice-section.warning {
+            border-left-color: var(--accent-gold-leaf);
+        }
+
+        .notice-section-title {
+            font-weight: 700;
+            color: var(--accent-leaf);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+        }
+
+        .notice-section.warning .notice-section-title {
+            color: var(--accent-gold-leaf);
+        }
+
+        .notice-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notice-list li {
+            position: relative;
+            padding-left: 14px;
             margin-bottom: 4px;
         }
 
-        .notice-text {
-            font-size: 0.82rem;
-            color: var(--text-main);
-            line-height: 1.45;
-            opacity: 0.9;
+        .notice-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-leaf);
         }
 
-        .notice-close {
-            background: transparent;
+        .modal-link {
+            color: var(--accent-cyan-water);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
             border: none;
-            color: var(--text-muted);
-            font-size: 1rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-leaf));
+            color: #040d08;
+            font-weight: 800;
+            font-size: 0.9rem;
             cursor: pointer;
-            padding: 0 4px;
-            transition: color 0.2s ease;
-            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            flex-shrink: 0;
         }
 
-        .notice-close:hover {
-            color: #ffffff;
+        .modal-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
-        /* Modern Sliding Tab System */
+        /* Main Page Tabs */
         .tab-nav {
             position: relative;
             display: flex;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 16px;
             padding: 5px;
             margin-bottom: 24px;
@@ -228,12 +456,12 @@
 
         .tab-btn {
             flex: 1;
-            padding: 12px;
+            padding: 10px 4px;
             border: none;
             background: transparent;
             color: var(--text-muted);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             border-radius: 12px;
             cursor: pointer;
             transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -243,7 +471,7 @@
         }
 
         .tab-btn.active {
-            color: #000000;
+            color: #040d08;
         }
 
         .tab-indicator {
@@ -251,15 +479,14 @@
             top: 5px;
             bottom: 5px;
             left: 5px;
-            width: calc(50% - 7px);
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            width: calc(33.333% - 6.66px);
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-leaf));
             border-radius: 12px;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
             z-index: 1;
         }
 
-        /* Animated Tab Content Container */
         .tab-wrapper {
             position: relative;
             overflow: hidden;
@@ -286,58 +513,52 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.8px;
-            color: var(--accent-gold);
+            color: var(--accent-leaf);
             margin: 24px 0 12px 6px;
             opacity: 0.85;
         }
 
-        .links-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        /* LINK CARD WITH ANIMATED GLOW BORDER */
+        .card-glow-wrapper {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            padding: 1.5px;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Enhanced Interactive Cards */
+        .card-glow-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg,
+                transparent 140deg,
+                var(--accent-leaf) 180deg,
+                var(--accent-emerald) 220deg,
+                transparent 260deg
+            );
+            animation: rotateBorder 4s linear infinite;
+        }
+
+        .card-glow-wrapper:hover {
+            transform: translateY(-3px) scale(1.01);
+        }
+
         .link-card {
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
+            background: #081a10;
             padding: 14px 18px;
-            border-radius: 18px;
+            border-radius: 17px;
             text-decoration: none;
             color: var(--text-main);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .link-card:hover::before {
-            left: 100%;
-        }
-
-        .link-card:hover {
-            background: var(--card-hover);
-            border-color: var(--border-glow);
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5),
-                        0 0 20px rgba(212, 175, 55, 0.15);
-        }
-
-        .link-card:active {
-            transform: translateY(-1px) scale(0.99);
         }
 
         .link-info {
@@ -353,11 +574,11 @@
             object-fit: cover;
             flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(52, 211, 153, 0.25);
             transition: transform 0.3s ease;
         }
 
-        .link-card:hover .link-icon {
+        .card-glow-wrapper:hover .link-icon {
             transform: scale(1.08) rotate(3deg);
         }
 
@@ -378,30 +599,54 @@
             margin-top: 2px;
         }
 
-        /* Dynamic Badges */
         .badge {
             font-size: 0.65rem;
             font-weight: 800;
             padding: 5px 10px;
             border-radius: 8px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose-gold));
-            color: #000000;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-leaf));
+            color: #040d08;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
             flex-shrink: 0;
         }
 
         .badge-cyan {
-            background: linear-gradient(135deg, #00c6ff, var(--accent-cyan));
+            background: linear-gradient(135deg, #00c6ff, var(--accent-cyan-water));
             color: #000000;
-            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
         }
 
-        .badge-green {
-            background: linear-gradient(135deg, #00b0ff, var(--accent-green));
+        .badge-gold {
+            background: linear-gradient(135deg, #f59e0b, var(--accent-gold-leaf));
             color: #000000;
-            box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .badge-purple {
+            background: linear-gradient(135deg, #c084fc, #a855f7);
+            color: #000000;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        .badge-red {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-blue {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .social-section {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .footer {
@@ -409,7 +654,7 @@
             text-align: center;
             font-size: 0.75rem;
             color: var(--text-muted);
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
             padding-top: 20px;
             letter-spacing: 0.5px;
         }
@@ -417,202 +662,319 @@
 </head>
 <body>
 
-    <div class="container">
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <div class="avatar-wrapper">
-                <img src="https://cdn.phototourl.com/free/2026-08-07-32d41ed4-4d66-4bdb-ba1e-6c60dee612d2.jpg" alt="Gia Bảo Avatar" class="avatar" id="userAvatar">
-            </div>
-            <h1 id="userName">RUBU MAP LIÊN QUÂN</h1>
-            <p>MOD LIÊN QUÂN FREE | RUBU MOD</p>
-        </div>
-
-        <!-- KHU VỰC THÔNG BÁO (NOTICE BOX) -->
-        <div class="notice-box" id="noticeBox">
-            <div class="notice-icon">📢</div>
-            <div class="notice-content">
-                <div class="notice-title">Thông Báo Cập Nhật</div>
-                <div class="notice-text">
-                    MAP Android CHỈ ĐĂNG NHẬP ĐƯỢC GARENA VÀ FB ,GARENA KHI ĐĂNG NHẬP GẶP LỖI MÀNG HÌNH TRẮNG THÌ TẢI THÊM APP GARENA RỒI ĐĂNG NHẬP TK VÀO APP RỒI LIÊN KÊT VỚI GAME
-                    CÒN FB THÌ MỌI NGƯỜI XÓA APP FB NGOÀI TRƯỚC RỒI VÀO GAME ĐĂNG NHẬP NHA | LƯU Ý ĐÂY MÀ MAP CHƠI KÍN MỌI NGƯỜI ĐÁNH KÍN ĐỂ TRÁNH BỊ BAND VÀ HẠN CHẾ MOD SKIN ĐỂ TRÁNH TRẬN ẢO
+    <!-- MODAL POPUP VỚI HÀO QUANG CẬP NHẬT -->
+    <div class="modal-overlay active" id="noticeModal">
+        <div class="modal-card-wrapper">
+            <div class="modal-card">
+                <div class="modal-tab-nav">
+                    <button class="modal-tab-btn active" id="mTabBtn1" onclick="switchModalTab('notice-tab-1', this)">🍃 Hệ Thống</button>
+                    <button class="modal-tab-btn" id="mTabBtn2" onclick="switchModalTab('notice-tab-2', this)">📜 HƯỚNG DẪN LỖI</button>
                 </div>
-            </div>
-            <button class="notice-close" onclick="closeNotice()" title="Đóng thông báo">✕</button>
-        </div>
 
-        <!-- Sliding Tab Navigation -->
-        <div class="tab-nav">
-            <div class="tab-indicator" id="tabIndicator"></div>
-            <button class="tab-btn active" onclick="switchTab('mods-tab', 0, this)">Mod Downloads</button>
-            <button class="tab-btn" onclick="switchTab('keys-tab', 1, this)">Key System</button>
-        </div>
-
-        <!-- Tab Content Area -->
-        <div class="tab-wrapper">
-            <!-- TAB 1: MOD DOWNLOADS -->
-            <div id="mods-tab" class="tab-content active">
-                <a href="https://www.mediafire.com/file/wci5qpjwnor5tq7/%25236_Garena%252BLi%25C3%25AAn%252BQu%25C3%25A2n%252BMobile_1_63_1_5_APKPure_apks_clone_clone_clone.apk/file" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">MAP Android BẢN 64 BIT</span>
-                            <span class="link-desc">64 BIT</span>
+                <div id="notice-tab-1" class="modal-tab-content active">
+                    <div class="modal-icon">🌿</div>
+                    <div class="modal-title">THÔNG BÁO CẬP NHẬT</div>
+                    <div class="modal-body">
+                        <div class="notice-section">
+                            <div class="notice-section-title">✨ Thông Tin Bản Mới</div>
+                            <p>Đã cập nhật bản Map mới nhất cho phiên bản Liên Quân hiện tại. Anh em vui lòng tải bản mới nhất để tránh phát sinh lỗi!</p>
                         </div>
-                    </div>
-                    <span class="badge">HOT</span>
-                </a>
-
-                <a href="https://www.mediafire.com/file/089bzkhc7f3y2sm/%5Bx32%5DLi%C3%AAn_Qu%C3%A2n_1.63.1.5_apkcombo.com_apks_clone%234_fix.apk" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">MAP Android BẢN 32 BIT</span>
-                            <span class="link-desc">32 BIT</span>
+                         <div class="notice-section">
+                            <div class="notice-section-title">🔗 LƯU Ý</div>
+                            <p>HÃY THAM GIA NHÓM TELEGRAM: <a href="https://t.me/Rubumap" class="modal-link" target="_blank">THAM GIA</a></p>
+                            <P>ĐỌC KỸ HƯỚNG DẪN TRƯỚC KHI SỬ DỤNG</P>
                         </div>
-                    </div>
-                </a>
-
-                <a href="https://testflight.apple.com/join/qQ8pcgfC" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">MAP IOS</span>
-                            <span class="link-desc">BẢN TF SÀI NGON SÀI BỀN ,MOD SKIN ÍT</span>
-                        </div>
-                    </div>
-                    <span class="badge badge-cyan">NEW</span>
-                </a>
-
-                <a href="https://ipas.cc/r371ga" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">MAP IOS</span>
-                            <span class="link-desc">BẢN NÀY MOD ĐƯỢC SKIN 3S</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://example.com/mod5" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://via.placeholder.com/64/d4af37/000000?text=M5" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">Custom UI Theme Pack</span>
-                            <span class="link-desc">Neon Cyberpunk skin overlay</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://example.com/mod6" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://via.placeholder.com/64/d4af37/000000?text=M6" alt="Mod Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">FPS Booster & Lag Fix</span>
-                            <span class="link-desc">Optimize RAM & render settings</span>
-                        </div>
-                    </div>
-                    <span class="badge">VIP</span>
-                </a>
-            </div>
-
-            <!-- TAB 2: KEY SYSTEM -->
-            <div id="keys-tab" class="tab-content">
-                <a href="https://example.com/key-android" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://via.placeholder.com/64/00e676/000000?text=AND" alt="Android Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">Get Key Android</span>
-                            <span class="link-desc">Get key for Android APK execution</span>
-                        </div>
-                    </div>
-                    <span class="badge badge-green">APK</span>
-                </a>
-
-                <a href="https://example.com/key-ios" target="_blank" class="link-card">
-                    <div class="link-info">
-                        <img src="https://via.placeholder.com/64/ffffff/000000?text=IOS" alt="iOS Icon" class="link-icon">
-                        <div class="link-text">
-                            <span class="link-title">Get Key iOS</span>
-                            <span class="link-desc">Get key for iOS / IPA execution</span>
-                        </div>
-                    </div>
-                    <span class="badge badge-cyan">IPA</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Social Profiles Section -->
-        <div class="section-title">Profiles & Socials</div>
-        <div class="links-group">
-            <a href="https://facebook.com" target="_blank" class="link-card">
-                <div class="link-info">
-                    <img src="https://via.placeholder.com/64/1877f2/ffffff?text=FB" alt="Social Icon" class="link-icon">
-                    <div class="link-text">
-                        <span class="link-title">Facebook Profile</span>
-                        <span class="link-desc">Contact for support</span>
                     </div>
                 </div>
-            </a>
 
-            <a href="https://youtube.com" target="_blank" class="link-card">
-                <div class="link-info">
-                    <img src="https://via.placeholder.com/64/ff0000/ffffff?text=YT" alt="Social Icon" class="link-icon">
-                    <div class="link-text">
-                        <span class="link-title">YouTube Channel</span>
-                        <span class="link-desc">Mod showcase & tutorials</span>
+                <div id="notice-tab-2" class="modal-tab-content">
+                    <div class="modal-icon">📜</div>
+                    <div class="modal-title">HƯỚNG DẪN & LƯU Ý SỬ DỤNG</div>
+                    <div class="modal-body">
+                        
+                        <!-- Quy định chung -->
+                        <div class="notice-section warning">
+                            <div class="notice-section-title">⚠️ Quy Định Căn Bản</div>
+                            <ul class="notice-list">
+                                <li>Không chia sẻ Key công khai để tránh bị hệ thống khóa Key.</li>
+                                <li>Liên hệ Admin nếu gặp sự cố Game hoặc không Get Key được.</li>
+                            </ul>
+                        </div>
+
+                         <!-- HƯỚNG DẪN TẢI MAP -->
+                        <div class="notice-section">
+                            <div class="notice-section-title">HƯỚNG DẪN TẢI MAP</div>
+                            <ul class="notice-list">
+                                <li>Hướng dẫn tải map ios : <a href="https://www.youtube.com/watch?v=t3mvr-8X9YM" target="_blank" class="modal-link">Xem ngay</a>.</li>
+                                <li><b>ĐỐI VỚI ANDR ẤN VÀO TẢI FILE APK RỒI CÀI ĐẶT LÀ XONG</b>.</li>
+                                <li><i>Lưu ý: NHỚ XÓA LIÊN QUÂN GỐC.</i></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Lỗi Android Garena -->
+                        <div class="notice-section">
+                            <div class="notice-section-title">📱 Đăng Nhập Garena (Android - Lỗi Màn Trắng)</div>
+                            <ul class="notice-list">
+                                <li><b>Bước 1:</b> Tải ứng dụng Garena APK <a href="https://www.mediafire.com/file/w3pxlyhtt80sn6o/garena-2-4-6-107.apk/file" class="modal-link" target="_blank">[Tải xuống tại đây]</a>.</li>
+                                <li><b>Bước 2:</b> Đăng nhập tài khoản Garena vào App vừa tải.</li>
+                                <li><b>Bước 3:</b> Mở Game -> Chọn đăng nhập Garena để liên kết ứng dụng.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Lỗi Facebook -->
+                        <div class="notice-section">
+                            <div class="notice-section-title">🌐 Đăng Nhập Facebook</div>
+                            <p>Bắt buộc <b>xóa / gỡ ứng dụng Facebook</b> ngoài máy trước. Sau đó vào Game, bấm chọn Facebook và đăng nhập tài khoản trực tiếp qua trình duyệt web của game.</p>
+                        </div>
+
+                        <!-- Sửa lỗi Get Key -->
+                        <div class="notice-section">
+                            <div class="notice-section-title">🔑 Lỗi Báo Sai Key Khi Đã Get Key</div>
+                            <ul class="notice-list">
+                                <li>Thử đổi kết nối từ <b>Wifi sang 4G</b> (hoặc ngược lại).</li>
+                                <li><b>Tắt tất cả ứng dụng VPN / Fake IP</b>.</li>
+                                <li><i>Lưu ý: Hệ thống không hỗ trợ IP nước ngoài.</i></li>
+                            </ul>
+                        </div>
+
+                    
+                        <!-- Lưu ý khác -->
+                        <div class="notice-section warning">
+                            <div class="notice-section-title">🚫 Hạn Chế & Cảnh Báo</div>
+                            <ul class="notice-list">
+                                <li><b>KHÔNG</b> hỗ trợ đăng nhập bằng tài khoản Google (GG).</li>
+                                <li>Đây là bản Map Kín, hãy thi đấu kín kẽ, tránh diễn quá lộ dẫn đến bị tố cáo/báo cáo khóa tài khoản.</li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
-            </a>
-        </div>
 
-        <div class="footer">
-            &copy; 2026 HGB Media. Managed by Gia Bảo.
+                <button class="modal-btn" onclick="toggleModal(false)">ĐÃ HIỂU / ĐÓNG</button>
+            </div>
         </div>
     </div>
 
+    <!-- TOÀN BỘ KHUNG NGOÀI CÓ VIỀN HÀO QUANG -->
+    <div class="glow-box">
+        <div class="container">
+            <div class="profile-header">
+                <div class="avatar-wrapper">
+                    <img src="https://cdn.phototourl.com/free/2026-08-07-32d41ed4-4d66-4bdb-ba1e-6c60dee612d2.jpg" alt="Gia Bảo Avatar" class="avatar" id="userAvatar">
+                </div>
+                <h1 id="userName">RUBU MAP LIÊN QUÂN</h1>
+                <p>MOD LIÊN QUÂN FREE | RUBU MOD</p>
+            </div>
+
+            <!-- NÚT THÔNG BÁO CÓ HÀO QUANG RUNNING -->
+            <div class="notice-action-group">
+                <div class="notice-btn-wrapper">
+                    <button class="toggle-notice-btn" onclick="openSpecificNotice('notice-tab-1')">🍃 Thông Báo Chung</button>
+                </div>
+                <div class="notice-btn-wrapper">
+                    <button class="toggle-notice-btn" onclick="openSpecificNotice('notice-tab-2')">📜 HƯỚNG DẪN & LƯU Ý</button>
+                </div>
+            </div>
+
+            <!-- TAB NAVIGATION -->
+            <div class="tab-nav">
+                <div class="tab-indicator" id="tabIndicator"></div>
+                <button class="tab-btn active" onclick="switchTab('mods-tab', 0, this)">Downloads</button>
+                <button class="tab-btn" onclick="switchTab('keys-tab', 1, this)">Key System</button>
+                <button class="tab-btn" onclick="switchTab('shop-tab', 2, this)">Shop Key</button>
+            </div>
+
+            <div class="tab-wrapper">
+                <!-- TAB 1: MODS -->
+                <div id="mods-tab" class="tab-content active">
+                    <div class="card-glow-wrapper">
+                        <a href="https://www.mediafire.com/file/wci5qpjwnor5tq7/%25236_Garena%252BLi%25C3%25AAn%252BQu%25C3%25A2n%252BMobile_1_63_1_5_APKPure_apks_clone_clone_clone.apk/file" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP Android BẢN 64 BIT</span>
+                                    <span class="link-desc">64 BIT</span>
+                                </div>
+                            </div>
+                            <span class="badge">HOT</span>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <a href="https://www.mediafire.com/file/089bzkhc7f3y2sm/%5Bx32%5DLi%C3%AAn_Qu%C3%A2n_1.63.1.5_apkcombo.com_apks_clone%234_fix.apk" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP Android BẢN 32 BIT</span>
+                                    <span class="link-desc">32 BIT</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <a href="https://testflight.apple.com/join/qQ8pcgfC" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP IOS</span>
+                                    <span class="link-desc">BẢN TF SÀI NGON SÀI BỀN ,MOD SKIN ÍT</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-cyan">NEW</span>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <a href="https://ipas.cc/r371ga" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP IOS</span>
+                                    <span class="link-desc">BẢN NÀY MOD ĐƯỢC SKIN 3S</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TAB 2: KEYS -->
+                <div id="keys-tab" class="tab-content">
+                    <div class="card-glow-wrapper">
+                        <a href="https://duymmo.io.vn/ctvkey/jubu.php" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-08-ac946bb9-9fae-45d2-becf-8ff785b4b36d.png" alt="Android Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">Get Key Android</span>
+                                    <span class="link-desc">Get key for Android APK execution</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-gold">APK</span>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <a href="https://link4sub.com/9mOKuQGVdk" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-08-ac946bb9-9fae-45d2-becf-8ff785b4b36d.png" alt="iOS Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">Get Key iOS</span>
+                                    <span class="link-desc">Get key for iOS / IPA execution</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-purple">IPA</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TAB 3: SHOP -->
+                <div id="shop-tab" class="tab-content">
+                    <div class="card-glow-wrapper">
+                        <a href="https://rubumapstore.com/" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-08-91eb1193-75bd-448b-bcb9-b79a5461496d.jpg" alt="Shop Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">SHOP BÁN KEY</span>
+                                    <span class="link-desc">TỰ ĐỘNG DÀNH CHO ANH EM LƯỜI VƯỢT</span>
+                                </div>
+                            </div>
+                            <span class="badge">ZALO</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘNG ĐỒNG & MẠNG XÃ HỘI (TELEGRAM, YOUTUBE, DISCORD) -->
+            <div class="section-title">KÊNH CỘNG ĐỒNG</div>
+            <div class="social-section">
+                <div class="card-glow-wrapper">
+                    <a href="https://t.me/Rubumap" target="_blank" class="link-card">
+                        <div class="link-info">
+                            <img src="https://cdn.phototourl.com/free/2026-08-08-06daa257-4bdb-4988-be67-f2e77d8a21f7.webp" alt="Telegram Icon" class="link-icon">
+                            <div class="link-text">
+                                <span class="link-title">Nhóm Telegram</span>
+                                <span class="link-desc">Cập nhật thông tin & bản MOD mới nhất</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-cyan">TELEGRAM</span>
+                    </a>
+                </div>
+
+                <div class="card-glow-wrapper">
+                    <a href="https://www.youtube.com/@Rubublox" target="_blank" class="link-card">
+                        <div class="link-info">
+                            <img src="https://cdn.phototourl.com/free/2026-08-08-541607de-98ee-4ee2-8682-a93d95c945f2.png" alt="YouTube Icon" class="link-icon">
+                            <div class="link-text">
+                                <span class="link-title">Kênh YouTube Official</span>
+                                <span class="link-desc">Xem hướng dẫn cài đặt & gameplay</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-red">YOUTUBE</span>
+                    </a>
+                </div>
+
+                <div class="card-glow-wrapper">
+                    <a href="https://discord.gg/VmFdWun24A" target="_blank" class="link-card">
+                        <div class="link-info">
+                            <img src="https://cdn.phototourl.com/free/2026-08-08-6612f018-5c2a-40c0-aba7-079606f456c6.webp" alt="Discord Icon" class="link-icon">
+                            <div class="link-text">
+                                <span class="link-title">Máy Chủ Discord</span>
+                                <span class="link-desc">Giao lưu cộng đồng & Hỗ trợ kỹ thuật</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-blue">DISCORD</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer">
+                &copy; 2026 RUBU DEV. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ĐIỀU KHIỂN -->
     <script>
-        function closeNotice() {
-            const notice = document.getElementById('noticeBox');
-            notice.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            notice.style.opacity = '0';
-            notice.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                notice.style.display = 'none';
-            }, 300);
+        function toggleModal(show) {
+            const modal = document.getElementById('noticeModal');
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
         }
 
-        function switchTab(tabId, index, element) {
-            const contents = document.querySelectorAll('.tab-content');
-            const buttons = document.querySelectorAll('.tab-btn');
+        function switchModalTab(tabId, btn) {
+            document.querySelectorAll('.modal-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.modal-tab-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function openSpecificNotice(tabId) {
+            toggleModal(true);
+            const btn = tabId === 'notice-tab-1' ? document.getElementById('mTabBtn1') : document.getElementById('mTabBtn2');
+            switchModalTab(tabId, btn);
+        }
+
+        function switchTab(tabId, index, btn) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+
             const indicator = document.getElementById('tabIndicator');
-
             indicator.style.transform = `translateX(${index * 100}%)`;
-
-            buttons.forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            setTimeout(() => {
-                document.getElementById(tabId).classList.add('active');
-            }, 50);
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const avatar = document.getElementById('userAvatar');
-            avatar.onerror = () => {
-                avatar.src = 'https://via.placeholder.com/150/d4af37/000000?text=GB';
-            };
-
-            const linkIcons = document.querySelectorAll('.link-icon');
-            linkIcons.forEach(icon => {
-                icon.onerror = () => {
-                    icon.src = 'https://via.placeholder.com/64/1a1e2a/d4af37?text=ICON';
-                };
-            });
-        });
     </script>
 </body>
 </html>
