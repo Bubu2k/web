@@ -456,12 +456,12 @@
 
         .tab-btn {
             flex: 1;
-            padding: 10px 4px;
+            padding: 10px 2px;
             border: none;
             background: transparent;
             color: var(--text-muted);
             font-weight: 700;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             border-radius: 12px;
             cursor: pointer;
             transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -479,7 +479,7 @@
             top: 5px;
             bottom: 5px;
             left: 5px;
-            width: calc(33.333% - 6.66px);
+            width: calc(25% - 3.75px);
             background: linear-gradient(135deg, var(--accent-emerald), var(--accent-leaf));
             border-radius: 12px;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -705,7 +705,7 @@
                         <div class="notice-section">
                             <div class="notice-section-title">HƯỚNG DẪN TẢI MAP</div>
                             <ul class="notice-list">
-                                <li>Hướng dẫn tải map ios : <a href="https://www.youtube.com/watch?v=t3mvr-8X9YM" target="_blank" class="modal-link">Xem ngay</a>.</li>
+                                <li>Hướng dẫn tải map ios : <a href="https://streamable.com/4pxvrg" target="_blank" class="modal-link">Xem ngay</a>.</li>
                                 <li><b>ĐỐI VỚI ANDR ẤN VÀO TẢI FILE APK RỒI CÀI ĐẶT LÀ XONG</b>.</li>
                                 <li><i>Lưu ý: NHỚ XÓA LIÊN QUÂN GỐC.</i></li>
                             </ul>
@@ -780,8 +780,9 @@
             <div class="tab-nav">
                 <div class="tab-indicator" id="tabIndicator"></div>
                 <button class="tab-btn active" onclick="switchTab('mods-tab', 0, this)">Downloads</button>
-                <button class="tab-btn" onclick="switchTab('keys-tab', 1, this)">Key System</button>
-                <button class="tab-btn" onclick="switchTab('shop-tab', 2, this)">Shop Key</button>
+                <button class="tab-btn" onclick="switchTab('download-guide-tab', 1, this)">Cách Tải</button>
+                <button class="tab-btn" onclick="switchTab('keys-tab', 2, this)">Lấy Key</button>
+                <button class="tab-btn" onclick="switchTab('shop-tab', 3, this)">Shop Key</button>
             </div>
 
             <div class="tab-wrapper">
@@ -848,6 +849,35 @@
                                 </div>
                             </div>
                         </a>
+                    </div>
+                </div>
+
+                <!-- TAB CÁCH TẢI (MỚI THÊM) -->
+                <div id="download-guide-tab" class="tab-content">
+                    <div class="card-glow-wrapper">
+                        <a href="https://streamable.com/4pxvrg" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Guide Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">HƯỚNG DẪN TẢI MAP IOS</span>
+                                    <span class="link-desc">Bấm để xem video chi tiết cách cài cho iOS</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-cyan">VIDEO</span>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <div class="link-card" style="cursor: default;">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-14-575feaf8-4297-4586-899f-7a54523c765f.png" alt="Android Guide" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">CÁCH TẢI CHO ANDROID</span>
+                                    <span class="link-desc">Xóa game gốc -> Bấm tải File APK về cài đặt -> Mở game và trải nghiệm</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-gold">APK</span>
+                        </div>
                     </div>
                 </div>
 
