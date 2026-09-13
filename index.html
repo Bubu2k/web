@@ -612,6 +612,12 @@
             flex-shrink: 0;
         }
 
+        .badge-free {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: #040d08;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
         .badge-cyan {
             background: linear-gradient(135deg, #00c6ff, var(--accent-cyan-water));
             color: #000000;
@@ -781,13 +787,15 @@
                 <div class="tab-indicator" id="tabIndicator"></div>
                 <button class="tab-btn active" onclick="switchTab('mods-tab', 0, this)">Downloads</button>
                 <button class="tab-btn" onclick="switchTab('download-guide-tab', 1, this)">Cách Tải</button>
-                <button class="tab-btn" onclick="switchTab('keys-tab', 2, this)">Lấy Key</button>
-                <button class="tab-btn" onclick="switchTab('shop-tab', 3, this)">Shop Key & Map Vip</button>
+                <button class="tab-btn" onclick="switchTab('keys-tab', 2, this)">Lấy Key FREE</button>
+                <button class="tab-btn" onclick="switchTab('shop-tab', 3, this)">Shop Key & MAP VIP</button>
             </div>
 
             <div class="tab-wrapper">
-                <!-- TAB 1: MODS -->
+                <!-- TAB 1: DOWNLOADS -->
                 <div id="mods-tab" class="tab-content active">
+                    
+                    <!-- DÁNH SÁCH CÁC BẢN FREE TRÊN ĐẦU -->
                     <div class="card-glow-wrapper">
                         <a href="https://notevn.com/share/bdftvjy4" target="_blank" class="link-card">
                             <div class="link-info">
@@ -797,7 +805,7 @@
                                     <span class="link-desc">ANH EM KEY FREE NHỚ LẤY KEY ĐÚNG BẢN V2</span>
                                 </div>
                             </div>
-                            <span class="badge">HOT</span>
+                            <span class="badge badge-free">FREE</span>
                         </a>
                     </div>
 
@@ -810,7 +818,7 @@
                                     <span class="link-desc">64 BIT</span>
                                 </div>
                             </div>
-                            <span class="badge">HOT</span>
+                            <span class="badge badge-free">FREE</span>
                         </a>
                     </div>
 
@@ -823,6 +831,7 @@
                                     <span class="link-desc">32 BIT</span>
                                 </div>
                             </div>
+                            <span class="badge badge-free">FREE</span>
                         </a>
                     </div>
 
@@ -835,7 +844,7 @@
                                     <span class="link-desc">BẢN Link 1</span>
                                 </div>
                             </div>
-                            <span class="badge badge-cyan">NEW</span>
+                            <span class="badge badge-free">FREE</span>
                         </a>
                     </div>
 
@@ -848,11 +857,39 @@
                                     <span class="link-desc">Bản Ios Link 2</span>
                                 </div>
                             </div>
+                            <span class="badge badge-free">FREE</span>
+                        </a>
+                    </div>
+
+                    <!-- 2 BẢN VIP CHUYỂN XUỐNG DƯỚI CÙNG -->
+                    <div class="card-glow-wrapper">
+                        <a href="#" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP Android Chấp Tố Vip</span>
+                                    <span class="link-desc">Bản Này Phải Mua Key</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-gold">VIP</span>
+                        </a>
+                    </div>
+
+                    <div class="card-glow-wrapper">
+                        <a href="#" target="_blank" class="link-card">
+                            <div class="link-info">
+                                <img src="https://cdn.phototourl.com/free/2026-08-07-64363bab-f892-4f98-acca-8307267c3dcd.jpg" alt="Mod Icon" class="link-icon">
+                                <div class="link-text">
+                                    <span class="link-title">MAP IOS Chấp Tố Vip</span>
+                                    <span class="link-desc">Bản Này Phải Mua Key</span>
+                                </div>
+                            </div>
+                            <span class="badge badge-gold">VIP</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- TAB CÁCH TẢI (MỚI THÊM) -->
+                <!-- TAB CÁCH TẢI -->
                 <div id="download-guide-tab" class="tab-content">
                     <div class="card-glow-wrapper">
                         <a href="https://streamable.com/4pxvrg" target="_blank" class="link-card">
@@ -940,7 +977,7 @@
                 </div>
             </div>
 
-            <!-- CỘNG ĐỒNG & MẠNG XÃ HỘI (TELEGRAM, YOUTUBE, DISCORD) -->
+            <!-- CỘNG ĐỒNG & MẠNG XÃ HỘI -->
             <div class="section-title">KÊNH CỘNG ĐỒNG</div>
             <div class="social-section">
                 <div class="card-glow-wrapper">
